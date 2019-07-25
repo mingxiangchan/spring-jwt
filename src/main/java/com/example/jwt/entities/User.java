@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 /**
  * User
  */
@@ -27,16 +29,14 @@ public class User {
         return this.id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getPassword() {
+        
         return this.password;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        this.password = encoder.encode(password);
     }
 
 

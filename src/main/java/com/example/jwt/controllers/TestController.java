@@ -1,8 +1,13 @@
 package com.example.jwt.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.jwt.entities.User;
+import com.example.jwt.security.CustomUserPrincipal;
+
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 /**
@@ -19,5 +24,17 @@ public class TestController {
     @GetMapping(value="/public")
     public String testPublic() {
         return "{\"message\": \"This is public\"}";
+    }    
+
+    @GetMapping(value="/currentUser")
+    public User currentUser(Authentication auth) {
+        CustomUserPrincipal principal = (CustomUserPrincipal) auth.getPrincipal();
+        return principal.getUser();
+    }    
+
+    @GetMapping(value="/signup")
+    public String signup(@RequestBody User user) {
+        System.out.println("");
+        return "{\"message\": \"This is restricted\"}";
     }    
 }
