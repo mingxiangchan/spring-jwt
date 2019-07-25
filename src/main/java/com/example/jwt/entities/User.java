@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
@@ -34,6 +36,7 @@ public class User {
         this.id = id;
     }
 
+    @JsonIgnore
     public String getPassword() {
 
         return this.password;

@@ -10,14 +10,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 @SuppressWarnings("serial")
 public class CustomUserPrincipal implements UserDetails {
     private User user;
- 
+
     public CustomUserPrincipal(User user) {
         this.user = user;
     }
 
     @Override
     public String getUsername() {
-        return this.user.getId().toString();
+        return user.getId().toString();
     }
 
     @Override
@@ -53,5 +53,5 @@ public class CustomUserPrincipal implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return true;
     }
-    
+
 }
