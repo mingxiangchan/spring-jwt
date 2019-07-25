@@ -2,6 +2,7 @@ package com.example.jwt.controllers;
 
 import com.example.jwt.entities.User;
 import com.example.jwt.repositories.UserRepository;
+import com.example.jwt.security.CustomUserDetailsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @Autowired
-    private UserRepository repository;
+    private CustomUserDetailsService userDetailsService;
 
     @GetMapping(value = "/restricted")
     public String restricted() {
@@ -28,9 +29,7 @@ public class TestController {
     }
 
     @GetMapping(value = "/currentUser")
-    public User currentUser(Authentication auth) {
-        String currentUserId = (String) auth.getPrincipal();
-        User currentUser = repository.findById(Long.parseLong(currentUserId)).orElse(null);
-        return currentUser;
+    public User currentUser() {
+        return userDetailsService.getCurrentUser();
     }
 }

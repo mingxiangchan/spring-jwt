@@ -2,7 +2,7 @@ package com.example.jwt.configuration;
 
 import com.example.jwt.security.JwtAuthenticationFilter;
 import com.example.jwt.security.JwtAuthorizationFilter;
-import com.example.jwt.services.CustomUserDetailsService;
+import com.example.jwt.security.CustomUserDetailsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -27,23 +27,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and()
-            .csrf().disable()
+        http.cors().and().csrf().disable()
             .authorizeRequests()
             .antMatchers("/public").permitAll()
             .antMatchers("/signup").permitAll()
-            .anyRequest().authenticated()
-            .and()
+            .anyRequest().authenticated().and()
             .addFilter(new JwtAuthenticationFilter(authenticationManager()))
-            .addFilter(new JwtAuthorizationFilter(authenticationManager()))
-            .sessionManagement()
+            .addFilter(new JwtAuthorizationFilter(authenticationManager())).sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService)
-            .passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Bean
