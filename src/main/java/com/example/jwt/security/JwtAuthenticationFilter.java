@@ -33,7 +33,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
             FilterChain filterChain, Authentication authentication) {
-        System.out.println();
         CustomUserPrincipal principal = ((CustomUserPrincipal) authentication.getPrincipal());
 
         String token = JwtUtils.generateJwt(principal.getUser());

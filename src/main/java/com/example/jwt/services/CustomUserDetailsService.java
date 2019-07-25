@@ -21,14 +21,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     // have to use the name loadUserByUsername due to old naming conventions
     @Override
-    public UserDetails loadUserByUsername(String userId) {
-        Long id = Long.parseLong(userId);
-        User user = repository.findById(id).orElse(null);
-        
+    public UserDetails loadUserByUsername(String username) {
+        User user = repository.findByUsername(username);
+
         if (user == null) {
-            throw new UsernameNotFoundException(userId);
+            throw new UsernameNotFoundException(username);
         }
         return new CustomUserPrincipal(user);
     }
 }
- 
