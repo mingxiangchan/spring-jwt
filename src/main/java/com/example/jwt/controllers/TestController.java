@@ -1,16 +1,12 @@
 package com.example.jwt.controllers;
 
-import org.springframework.web.bind.annotation.RestController;
-
 import com.example.jwt.entities.User;
 import com.example.jwt.repositories.UserRepository;
-import com.example.jwt.security.CustomUserPrincipal;
-import com.example.jwt.services.CustomUserDetailsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * TestController

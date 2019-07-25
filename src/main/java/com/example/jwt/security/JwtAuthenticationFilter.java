@@ -1,10 +1,13 @@
 package com.example.jwt.security;
 
+import java.util.Map;
+
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.example.jwt.constants.SecurityConstants;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,11 +26,16 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password);
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String, String> data = mapper.readValue(request.getInputStream(), Map.class);
+            return authenticationManager
+                    .authenticate(new UsernamePasswordAuthenticationToken(data.get("username"), data.get("password")));
+        } catch (Exception e) {
+        } finally {
+        }
 
-        return authenticationManager.authenticate(authToken);
+        return null;
     }
 
     @Override
