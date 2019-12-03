@@ -4,7 +4,7 @@ package com.example.jwt.constants;
  * SecurityConstants
  */
 public class SecurityConstants {
-    public static final String AUTH_LOGIN_URL = "/api/authenticate";
+    public static final String AUTH_LOGIN_URL = "/login";
 
     public static final String JWT_SECRET = "WmZq4t7w9z$C&F)J@NcRfUjXn2r5u8x/A%D*G-KaPdSgVkYp3s6v9y$B&E(H+MbQ";
 

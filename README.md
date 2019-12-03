@@ -17,5 +17,5 @@ localhost:8080/restricted
 Make a POST request to the authentication endpoint to get your JWT. The resulting JWT will be in the response's `Authorization` header.
 
 ```
-http://localhost:8080/api/authenticate?username=user&password=password
+http://localhost:8080/api/login?username=user&password=password
 ```
